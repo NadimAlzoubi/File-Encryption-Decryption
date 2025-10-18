@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>File Encryption & Decryption</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+
+    <style>
+      :root {
+        --bg: #0f1115;
+        --panel: #161a20;
+        --text: #e7e7e7;
+        --muted: #a9b0bb;
+        --border: #2a2f36;
+        --accent: #0ea5e9;
+        --accent-2: #38bdf8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font: 15px/1.5 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+        padding: 24px;
+      }
+
+      .container {
+        max-width: 980px;
+        margin: 0 auto;
+      }
+
+      header {
+        margin-bottom: 24px;
+        text-align: center;
+      }
+      header h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+      }
+      header p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      @media (min-width: 860px) {
+        .grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 18px;
+      }
+
+      .card h2 {
+        margin: 0 0 14px;
+        font-size: 18px;
+        color: var(--accent-2);
+      }
+
+      .field {
+        margin-bottom: 14px;
+      }
+      .label {
+        display: block;
+        font-size: 13px;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+
+      input[type="file"] {
+        width: 100%;
+        color: var(--text);
+        background: #0e1218;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 10px;
+      }
+      input[type="file"]::file-selector-button {
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 14px;
+        margin-right: 12px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .hint {
+        margin-top: 6px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      button {
+        width: 100%;
+        appearance: none;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 12px 16px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .links {
+        margin-top: 12px;
+        display: grid;
+        gap: 10px;
+      }
+      .links a {
+        display: none;
+        color: #c8eeff;
+        text-decoration: none;
+        background: #0e141b;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 10px 12px;
+        text-align: center;
+        font-weight: 600;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>File Encryption & Decryption</h1>
+        <p>Secure AES-GCM (256-bit)</p>
+      </header>
+
+      <div class="grid">
+        <section class="card" aria-labelledby="encrypt-title">
+          <h2 id="encrypt-title">🔐 Encrypt</h2>
+
+          <div class="field">
+            <label class="label" for="fileInput">Source file</label>
+            <input type="file" id="fileInput" />
+            <div class="hint">Select any file to encrypt. A key will be generated and saved as a `.key` file.</div>
+          </div>
+
+          <button type="button" onclick="encryptFile()">Encrypt File</button>
+
+          <div class="links">
+            <a id="downloadKey">⬇️ Download Key (.key)</a>
+            <a id="downloadEncrypted">⬇️ Download Encrypted File (.enc)</a>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="decrypt-title">
+          <h2 id="decrypt-title">🔓 Decrypt</h2>
+
+          <div class="field">
+            <label class="label" for="encryptedFileInput">Encrypted file (.enc)</label>
+            <input type="file" id="encryptedFileInput" />
+          </div>
+
+          <div class="field">
+            <label class="label" for="keyFileInput">Key file (.key)</label>
+            <input type="file" id="keyFileInput" />
+            <div class="hint">Use the key file you downloaded during encryption.</div>
+          </div>
+
+          <button type="button" onclick="decryptFile()">Decrypt File</button>
+
+          <div class="links">
+            <a id="downloadDecrypted">⬇️ Download Decrypted File</a>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
