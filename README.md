@@ -1,24 +1,30 @@
-# 🔐 File Encryption & Decryption
+# 🔐 File Encryption & Decryption (Client-Side)
 
-A simple web tool to **encrypt and decrypt files** directly in your browser using the **Web Crypto API (AES-GCM 256-bit)**.  
-No uploads, no servers — everything happens locally on your device.
+A simple web tool that lets you **encrypt** and **decrypt** files directly in your browser.  
+No server, no upload — **everything happens locally** using the Web Crypto API (AES-GCM 256-bit).
+
+## How to Use
+1. Open the `index.html` file in your browser.
+2. **Encrypt:**
+   - Select a file → Click **Encrypt File**
+   - The tool will generate:
+     - `yourfile.enc` → encrypted file
+     - `yourfile.key` → secret key (save it!)
+3. **Decrypt:**
+   - Select the `.enc` file + the `.key` file → Click **Decrypt File**
+
+## Features
+- 100% local, private, offline
+- AES-GCM 256-bit encryption (Web Crypto API)
+- No backend or dependencies
+
+## Files
+- index.html # UI + encryption/decryption logic in one page
+
+## Important
+- **Don't lose the .key** — without it, the file cannot be decrypted.
+- Keep the key **separate** from the encrypted file for safety.
 
 ---
 
-## ⚙️ How it works
-
-1. Choose a file and click **Encrypt File**.  
-   → The tool will create:
-   - `<filename>.enc` — your encrypted file  
-   - `<filename>.key` — the secret key (keep it safe)
-
-2. To decrypt:  
-   Upload the `.enc` file and its `.key`, then click **Decrypt File**.
-
----
-
-## 🧩 Tech
-
-- **HTML + CSS + JavaScript**
-- **AES-GCM 256-bit encryption**
-- 100% client-side, private, and offline.
+Made for personal use — feel free to edit or improve 😊
